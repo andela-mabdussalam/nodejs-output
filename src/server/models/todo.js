@@ -4,7 +4,8 @@ export default (sequelize, DataTypes) => {
   const Todo = sequelize.define('Todo', {
     title: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     status: {
       type: DataTypes.ENUM('in progress', 'done', 'not started'),
