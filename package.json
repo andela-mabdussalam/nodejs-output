@@ -26,7 +26,8 @@
     "start": "nodemon --exec babel-node -- ./app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:migrate": "sequelize db:migrate",
-    "db:migrate:undo": "sequelize db:migrate:undo:all"
+    "db:migrate:undo": "sequelize db:migrate:undo:all",
+    "test:db:migrate" : "NODE_ENV=test && npm run db:migrate"
   },
   "repository": {
     "type": "git",
