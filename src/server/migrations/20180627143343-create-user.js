@@ -17,24 +17,12 @@ module.exports = {
         unique: true,
         allowNull: false,
         validate: {
-          isEmail: true,
-          nonEmpty: true
+          isEmail: true
         }
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          nonEmpty: true
-        }
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-          as: 'userId'
-        }
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

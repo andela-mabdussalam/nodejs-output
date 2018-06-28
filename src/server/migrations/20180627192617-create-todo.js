@@ -17,6 +17,15 @@ module.exports = {
         type: Sequelize.ENUM('in progress', 'done', 'not started'),
         defaultValue: 'not started'
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
