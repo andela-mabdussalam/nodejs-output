@@ -1,6 +1,7 @@
 import controller from '../controller'
 
 const todoController = controller.todo
+const userController = controller.user
 
 const Routes = (app) => {
   app.get('/', (req, res) => {
@@ -20,6 +21,15 @@ const Routes = (app) => {
 
   app.route('/todos/:status')
     .get(todoController.getByStatus)
+
+  app.route('/users')
+    .post(userController.create)
+    .get(userController.getAll)
+
+  app.route('/user/:id')
+    .get(userController.getById)
+    .put(userController.updateById)
+    .delete(userController.deleteById)
 
 }
 

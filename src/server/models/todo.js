@@ -10,20 +10,13 @@ export default (sequelize, DataTypes) => {
     status: {
       type: DataTypes.ENUM('in progress', 'done', 'not started'),
       defaultValue: 'not started'
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Users',
-        key: 'id',
-        as: 'userId'
-      }
     }
   }, {});
   Todo.associate = (models) => {
     // associations can be defined here
     Todo.belongsTo(models.User, {
-      foreignKey: 'userId'
+      foreignKey: 'userId',
+      onDelete: 'CASCADE'
     });
   };
   return Todo;
