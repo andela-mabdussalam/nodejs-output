@@ -50,3 +50,28 @@ Design and Build a simple CRUD API for  todos.
     "email": "delete@email.com",
     "password": "p@ssword"
   }
+* PUT `/user/:id`:
+  * fields are optional
+  ```json
+  {
+    "fullname": "ToBe Deleted",
+    "email": "delete@email.com",
+    "password": "p@ssword"
+  }
+  ```
+* PUT `/user/:userId/todo/:id`:
+  * Cannot edit the title of a todo that has status = "done" and status can be changed from "done"
+  ```json
+  {
+    "title": "some title here",
+  }
+  or
+  {
+    "status": "in progress"
+  }
+  or
+  {
+    "title": "some new title",
+    "status": "done"
+  }
+  ```
