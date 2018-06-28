@@ -9,6 +9,9 @@ Design and Build a simple CRUD API for  todos.
 - I cannot edit the title of a todo that has status = "done".
 - I should be able to view all todos, todo by Id, and todos by status
 
+Added functionality
+- A user can not edit or delete another user's detail
+
 ## Routes
 * POST `/users` for creating new user
 * GET `/users` for fetching all users
@@ -20,7 +23,6 @@ Design and Build a simple CRUD API for  todos.
 * GET `/user/:userId/todos/:status` for fetching user's todos by `todo status`
 * PUT `/user/:userId/todo/:id` for updating to todo by `id`
 * DELETE `/user/:userId/todo/:id` for deleting to todo by `id`
-* GET `/todos`
 * POST `/login` for user login
 
 ### Request Body
