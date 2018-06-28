@@ -7,7 +7,7 @@ export default {
     }).then((todo) => {
       if (todo) {
         return res.status(409).send({
-          message: 'This Todo title already exists in system'
+          message: 'This Todo title already exists in the system'
         })
       }
 
