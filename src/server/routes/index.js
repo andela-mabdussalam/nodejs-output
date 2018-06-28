@@ -1,5 +1,5 @@
 import controller from '../controller'
-import { authenticateToken, verifyUserId} from '../middleware/auth'
+import { authenticateToken, verifyUserId } from '../middleware/auth'
 
 const todoController = controller.todo
 const userController = controller.user
