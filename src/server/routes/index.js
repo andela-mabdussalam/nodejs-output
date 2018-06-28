@@ -12,18 +12,6 @@ const Routes = (app) => {
     })
   })
 
-  app.route('/todos')
-    .post(authenticateToken, todoController.create)
-    .get(todoController.getAll)
-
-  app.route('/todo/:id')
-    .get(authenticateToken, todoController.getById)
-    .put(authenticateToken, todoController.updateById)
-    .delete(authenticateToken, todoController.deleteById)
-
-  app.route('/todos/:status')
-    .get(todoController.getByStatus)
-
   app.route('/users')
     .post(userController.create)
     .get(authenticateToken, userController.getAll)
@@ -32,6 +20,18 @@ const Routes = (app) => {
     .get(authenticateToken, userController.getById)
     .put(authenticateToken, verifyUserId, userController.updateById)
     .delete(authenticateToken, verifyUserId, userController.deleteById)
+
+  app.route('/user/:userId/todos')
+    .post(authenticateToken, todoController.create)
+    .get(todoController.getAll)
+
+  app.route('/user/:userId/todo/:id')
+    .get(authenticateToken, verifyUserId, todoController.getById)
+    .put(authenticateToken, verifyUserId, todoController.updateById)
+    .delete(authenticateToken, verifyUserId, todoController.deleteById)
+
+  app.route('/user/:userId/todos/:status')
+    .get(todoController.getByStatus)
 
   app.route('/login')
     .post(authController.login)

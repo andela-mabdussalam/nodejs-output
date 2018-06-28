@@ -1,3 +1,4 @@
+import { Op } from 'sequelize'
 import model from '../models'
 
 export default {
@@ -10,6 +11,8 @@ export default {
           message: 'This Todo title already exists in the system'
         })
       }
+
+      req.body.userId = Number(req.params.userId)
 
       return model.Todo.create(req.body).then((result) => {
         res.status(201).send({
@@ -43,30 +46,32 @@ export default {
     });
   },
 
-  getById(req, res) {
-    return model.Todo.findById(req.params.id).then((todo) => {
-      if (!todo) {
-        return res.status(404).send({
-          message: 'No todo found with this id'
-        })
-      }
-      return res.status(200).send({
-        data: {
-          title: todo.title,
-          status: todo.status
-        }
-      })
-    }).catch((err) => {
-      res.status(400).send({
-        err,
-        message: 'Error occured while fetching todo'
-      })
-    });
-  },
+  // getById(req, res) {
+  //   return model.Todo.findById(req.params.id).then((todo) => {
+  //     if (!todo) {
+  //       return res.status(404).send({
+  //         message: 'No todo found with this id'
+  //       })
+  //     }
+  //     return res.status(200).send({
+  //       data: {
+  //         title: todo.title,
+  //         status: todo.status
+  //       }
+  //     })
+  //   }).catch((err) => {
+  //     res.status(400).send({
+  //       err,
+  //       message: 'Error occured while fetching todo'
+  //     })
+  //   });
+  // },
 
   getByStatus(req, res) {
     return model.Todo.findAll({
-      where: { status: req.params.status }
+      where: {
+        [Op.and]: [{ id: req.params.id }, { status: req.params.status }]
+      }
     }).then((todos) => {
       if (!todos) {
         return res.status(404).send({
@@ -80,6 +85,32 @@ export default {
       res.status(400).send({
         err,
         message: 'Error occured while fetching todos by status'
+      })
+    });
+  },
+
+  getById(req, res) {
+    return model.Todo.findOne({
+      where: {
+        [Op.and]: [{ id: req.params.id }, { userId: req.params.userId }]
+      }
+    }).then((todo) => {
+      if (!todo) {
+        return res.status(404).send({
+          message: 'No todos found'
+        })
+      }
+      return res.status(200).send({
+        data: {
+          title: todo.title,
+          status: todo.status
+        }
+      })
+    }).catch((err) => {
+      res.status(400).send({
+        err,
+        message:
+        `Error occured while fetching todos by userId: ${req.params.userId}`
       })
     });
   },
@@ -108,7 +139,7 @@ export default {
         }).catch((err) => {
           res.status(400).send({
             err,
-            message: ` Error occured while updating Todo: ${todo.title}`
+            message: `Error occured while updating Todo: ${todo.title}`
           })
         });
     })
@@ -128,9 +159,7 @@ export default {
       }
 
       return todo.destroy().then((result) => {
-        res.status(204).send({
-          message: `Todo: ${todo.title} was deleted successfully`
-        })
+        res.status(204)
       }).catch((err) => {
         res.status(400).send({
           err,
