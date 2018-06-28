@@ -10,7 +10,7 @@ Design and Build a simple CRUD API for  todos.
 - I should be able to view all todos, todo by Id, and todos by status
 
 ## Routes
-* POST `/users` for creating user
+* POST `/users` for creating new user
 * GET `/users` for fetching all users
 * GET `/user/:id` for fetching user by `id` which also includes user's todo lists
 * PUT `/user/:id` for update user by `id`
@@ -22,3 +22,31 @@ Design and Build a simple CRUD API for  todos.
 * DELETE `/user/:userId/todo/:id` for deleting to todo by `id`
 * GET `/todos`
 * POST `/login` for user login
+
+### Request Body
+* POST `/users`:
+  ```json
+  {
+    "fullname": "ToBe Deleted",
+    "email": "delete@email.com",
+    "password": "p@ssword"
+  }
+  ```
+* POST `/user/:userId/todos`:
+  * `status` has a default value - `not started`
+  ```json
+  {
+    "title": "To be Deleted todo",
+    "status": "in progress",
+  }
+  or
+  {
+    "title": "with out status"
+  }
+  ```
+* POST `/login`:
+  ```json
+  {
+    "email": "delete@email.com",
+    "password": "p@ssword"
+  }
