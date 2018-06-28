@@ -46,11 +46,11 @@ export default {
   getById(req, res) {
     return model.Todo.findById(req.params.id).then((todo) => {
       if (!todo) {
-        res.status(404).send({
+        return res.status(404).send({
           message: 'No todo found with this id'
         })
       }
-      res.status(200).send({
+      return res.status(200).send({
         data: {
           title: todo.title,
           status: todo.status

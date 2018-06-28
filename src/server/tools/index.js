@@ -6,12 +6,11 @@ export const hashPassword = (password) => {
   return bcrypt.hashSync(password, salt)
 }
 
-const secret = process.env.SECRET ? process.env.SECRET : 'thisisademosecret'
-
 export const token = (info) => {
-  jwt.sign({
+  const secret = process.env.SECRET ? process.env.SECRET : 'thisisademosecret'
+  return jwt.sign({
     data: {
-      userid: info.id,
+      userId: info.id,
       email: info.email
     }
   }, secret, {

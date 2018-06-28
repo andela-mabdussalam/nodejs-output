@@ -1,5 +1,5 @@
 import model from '../models'
-import { hashPassword } from '../tools'
+import { hashPassword, token } from '../tools'
 
 export default {
   create(req, res) {
@@ -15,6 +15,7 @@ export default {
       return model.User.create(req.body).then((result) => {
         res.status(201).send({
           data: result,
+          token: token(result),
           message: 'User created successfully'
         })
       }).catch((err) => {
@@ -57,11 +58,11 @@ export default {
       }]
     }).then((user) => {
       if (!user) {
-        res.status(404).send({
+        return res.status(404).send({
           message: 'No user found with this id'
         })
       }
-      res.status(200).send({
+      return res.status(200).send({
         data: {
           fullname: user.fullname,
           email: user.email,

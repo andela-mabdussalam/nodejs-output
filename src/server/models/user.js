@@ -1,6 +1,5 @@
 'use strict';
 
-import bcrypt from 'bcrypt'
 import { hashPassword } from '../tools'
 
 export default (sequelize, DataTypes) => {
@@ -25,11 +24,6 @@ export default (sequelize, DataTypes) => {
       beforeCreate: (userEntity) => {
         const user = userEntity
         user.password = hashPassword(user.password)
-      }
-    },
-    instanceMethods: {
-      validPassword(password) {
-        return bcrypt.compareSync(password, this.password)
       }
     }
   });
