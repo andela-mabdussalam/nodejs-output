@@ -11,6 +11,7 @@ Design and Build a simple CRUD API for  todos.
 
 Added functionality
 - A user can not edit or delete another user's detail
+- I can only edit or delete my todo
 
 ## Routes
 * POST `/users` for creating new user
@@ -24,6 +25,7 @@ Added functionality
 * PUT `/user/:userId/todo/:id` for updating to todo by `id`
 * DELETE `/user/:userId/todo/:id` for deleting to todo by `id`
 * POST `/login` for user login
+* GET `/todos` to fetch all todos
 
 ### Request Body
 * POST `/users`:

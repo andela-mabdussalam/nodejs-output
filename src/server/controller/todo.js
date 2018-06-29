@@ -46,27 +46,6 @@ export default {
     });
   },
 
-  // getById(req, res) {
-  //   return model.Todo.findById(req.params.id).then((todo) => {
-  //     if (!todo) {
-  //       return res.status(404).send({
-  //         message: 'No todo found with this id'
-  //       })
-  //     }
-  //     return res.status(200).send({
-  //       data: {
-  //         title: todo.title,
-  //         status: todo.status
-  //       }
-  //     })
-  //   }).catch((err) => {
-  //     res.status(400).send({
-  //       err,
-  //       message: 'Error occured while fetching todo'
-  //     })
-  //   });
-  // },
-
   getByStatus(req, res) {
     return model.Todo.findAll({
       where: {

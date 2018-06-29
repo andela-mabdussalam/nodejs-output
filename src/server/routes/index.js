@@ -23,7 +23,9 @@ const Routes = (app) => {
 
   app.route('/user/:userId/todos')
     .post(authenticateToken, todoController.create)
-    .get(todoController.getAll)
+
+  app.route('/todos')
+    .get(authenticateToken, todoController.getAll)
 
   app.route('/user/:userId/todo/:id')
     .get(authenticateToken, verifyUserId, todoController.getById)
